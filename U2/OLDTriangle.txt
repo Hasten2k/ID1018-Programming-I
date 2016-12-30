@@ -1,0 +1,180 @@
+/************************************************************
+*
+*   Program to calculate various values on a given triangle,
+*   depending on what data the user decides to input.
+*
+************************************************************/
+
+// Import utilities
+import java.util.*;
+
+class Triangle {
+
+    // Set the Java Utility Scanner as global input tool
+    static Scanner in = new Scanner (System.in);
+
+    public static void main(String[] args) {
+        in.useLocale(Locale.US);
+
+        // User instructions
+        System.out.println("Welcome to the Triangle Calculations program.");
+        System.out.println("Please start by providing the information you have about the Triangle in question.");
+
+        // Cosmetic new line
+        System.out.println("");
+
+        // Ask the user for info about the Triangle
+        int         calculationSelection = askForTriangleInfo();
+
+        // Show user possible calculations
+            // Area of Triangle
+            // Circumference of Triangle
+            // Triangle Type
+                // By Sides
+                // By Angles
+        System.out.println("Possible Calculations:");
+        System.out.println("------------------------------");
+        System.out.println("1.\tArea of Triangle");
+        System.out.println("2.\tCircumference of Triangle");
+        System.out.println("3.\tType of Triangle, by Sides");
+        System.out.println("4.\tType of Triangle, by internal Angles");
+
+        // Cosmetic new line
+        System.out.println();
+
+        System.out.print("Choose what type of calculation you want to do by typing the corresponding number: ");
+        // Get the users choice of calculation
+        int calculationSelection = in.nextInt();
+        // Clear out the read-buffer with a newline
+        System.out.println();
+
+        // Call the appropriate method from user selection
+        switch (calculationSelection) {
+        case 1:
+            areaOfTriangle();
+            break;
+        case 2:
+            circumferenceOfTriangle();
+            break;
+        case 3:
+            triangleTypeBySides(sideA, sideB, sideC);
+            break;
+        case 4:
+            triangleTypeByAngles();
+            break;
+        }
+
+    } // End main method
+
+    public static int askForTriangleInfo() {
+
+        System.out.printf("Given your triangle. We will call the different sides a, b, and c.\nC is the longest one.\n");
+
+        // Cosmetic new line
+        System.out.println("");
+        System.out.println("The angle opposite side a will be called angle U, the side opposite side b will be called angle V and the remaining angle will be called W.");
+
+        // Initiate variables for lenths and angles of triangle
+        // Sides
+        double      sideA = 0;
+        double      sideB = 0;
+        double      sideC = 0;
+
+        // Angles
+        double      angleU = 0;
+        double      angleV = 0;
+        double      angleW = 0;
+
+        // helper for determining that all sides are larger than 0
+        boolean     largerThanZero = false;
+        // helper for determining that all angles are smaller than 180 degrees
+        boolean     smallerThan180 = true;
+
+        // Cosmetic new line
+        System.out.println("");
+        // Ask user for length of sides and store in variables, prevent user from inputing negative numbers
+        System.out.println("Please provide the length of sides below. If you do not know a value, please type in '-1'.\nFor any number values, please use '.' as a decimal delimiter.");
+
+        do {
+            System.out.print("Length of side a: ");
+            sideA = in.nextDouble();
+            System.out.print("Length of side b: ");
+            sideB = in.nextDouble();
+            System.out.print("Length of side c: ");
+            sideC = in.nextDouble();
+
+            // check that values are larger than 0
+            if (sideA == -1) {
+                largerThanZero = (sideB > 0 & sideC > 0);
+            } else if (sideB == -1) {
+                largerThanZero = (sideA > 0 & sideC > 0);
+            } else if (sideC == -1) {
+                largerThanZero = (sideA > 0 & sideB > 0);
+            } else {
+                // Check that all values are larger than zero
+                largerThanZero = (sideA > 0 & sideB > 0 & sideC > 0);
+            }
+
+            if (!largerThanZero) {
+                System.out.println("Sorry, all variables have to be larger than 0. Try again.");
+            }
+        } while (!largerThanZero);
+
+        return calculationSelection;
+
+    }
+
+    // Method to calculate Area of Triangle
+    public static void areaOfTriangle() {
+
+        // Herons formula if all three sides are known
+
+    } // End areaOfTriangle
+
+    // Method to calculate Circumference of Triangle
+    public static void circumferenceOfTriangle() {
+
+    } // End circumferenceOfTriangle
+
+    // Method to calculate Triangle Type by Sides
+    public static void triangleTypeBySides(double a, double b, double c) {
+
+        // Set helper variables for comparing sides:
+        boolean aEqualsB = a == b;
+        boolean aEqualsC = a == c;
+        boolean bEqualsC = b == c;
+
+        // Types possible:
+        if (aEqualsB & bEqualsC) {
+            // Equilateral
+            // All sides are equal
+            System.out.println("All sides are equal, hence, your triangle is equilateral.");
+        } else if (aEqualsB | aEqualsC | bEqualsC) {
+            // Isosceles triangle
+            // Two sides equal
+            System.out.println("Two sides are equal, the triangle is an Isosceles Triangle.");
+        } else {
+            // Scalene triangle
+            // All sides different
+            System.out.println("No sides are equal, the triangle is a Scalene Triangle.");
+        }
+    } // End triangleTypeBySides
+
+    // Method to calculate Triangle Type by Angles
+    public static void triangleTypeByAngles() {
+        // Triangle types:
+            // Right Triangle
+                // one angle is 90 degrees
+            // Acute Triangle
+                // All angles are >90 degrees
+            // Obtuse Triangle
+                // One Angle is <90 degrees
+            // Degenerate Triangle
+                // One angle = 180 degrees
+            // Isoceles Triangle
+                // Two angles are equal
+            // Equilateral Triangle
+                // All angles are equal
+
+    }
+}
